@@ -1,5 +1,5 @@
 {
-  "name": "criterion",
+  "name": "nekrion",
   "version": "1.0.0",
   "description": "Type-safe, chainable dataset evaluator that dynamically generates logic-based search methods from a user-defined comparator.",
   "main": "dist/index.js",
@@ -18,7 +18,7 @@
     "prepare": "npm run build"
   },
   "keywords": [
-    "criterion",
+    "nexkrion",
     "search",
     "logic",
     "comparator",

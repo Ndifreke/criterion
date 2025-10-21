@@ -1,6 +1,6 @@
 # Criterion
 
-[![npm version](https://badge.fury.io/js/criterion.svg)](https://badge.fury.io/js/criterion)
+[![npm version](nekrion)](https://badge.fury.io/js/nekrion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > A type-safe, chainable dataset evaluator that dynamically generates logic-based search methods from a user-defined comparator.
@@ -29,9 +29,9 @@ Criterion is a composable engine for building chainable data queries. It dynamic
 ## Installation
 
 ```bash
-npm install criterion
+npm install nekrion
 # or
-yarn add criterion
+yarn add nekrion
 ```
 
 ## Usage
@@ -41,7 +41,7 @@ Criterion works by taking a dataset and a comparator function. The comparator de
 ### Example: Numbers
 
 ```typescript
-import Criterion from 'criterion';
+import Criterion from "nekrion";
 
 const comparator = (n: number, test = 2) => ({
   even: n % 2 === 0,
@@ -49,31 +49,37 @@ const comparator = (n: number, test = 2) => ({
   multipleOf3: n % 3 === 0,
 });
 
-const numbers = [1, 2, 3, 4, 5, 6, 9];
+const numbers = [1, 2, 3, 4, 4, 5, 6, 9];
 const criterion = Criterion(numbers, comparator);
 
 const result = criterion
-  .even()       // Filters for even numbers
-  .gt(3)        // Filters for numbers greater than 3
-  .multipleOf3()// Filters for multiples of 3
-  .dedupe()     // Removes duplicates
-  .value;
+  .even() // Filters for even numbers
+  .gt(3) // Filters for numbers greater than 3
+  .multipleOf3() // Filters for multiples of 3
+  .dedupe().value; // Removes duplicates
 
-console.log(result); // [6]
+console.log(result); // [ 2, 4, 6, 5, 9, 3 ]
 ```
 
 ### Example: Objects
 
 ```typescript
-import Criterion from 'criterion';
-
+import Criterion from "nekrion";
 type User = { id: number; age: number; active: boolean };
 
-const comparator = (u: User, test: User = { id: 0, age: 25, active: true }) => ({
-  adult: u.age >= 18,
-  older: u.age > test.age,
-  active: u.active,
-});
+const comparator = (u: User, test: User = { id: 0, age: 25, active: true }) => {
+  if (u === null)
+    return {
+      adult: false,
+      older: false,
+      active: false,
+    };
+  return {
+    adult: u.age >= 18,
+    older: u.age > test.age,
+    active: u.active,
+  };
+};
 
 const users: User[] = [
   { id: 1, age: 17, active: true },
@@ -82,20 +88,16 @@ const users: User[] = [
   { id: 4, age: 30, active: true },
 ];
 
-const criterion = Criterion(users, comparator);
+const criterion = create(users, comparator);
 
-const result = criterion
-  .adult()
-  .older({ id: 999, age: 20, active: true })
-  .dedupe('age')
-  .value;
+const result = criterion.adult().older({ id: 999, age: 20, active: true }).dedupe("age").value;
 
 console.log(result);
 /*
-[
-  { id: 2, age: 22, active: false },
-  { id: 3, age: 30, active: true },
-]
+ [
+   { id: 2, age: 22, active: false }, 
+   { id: 3, age: 30, active: true  } 
+  ]
 */
 ```
 
@@ -109,8 +111,9 @@ Creates a new Criterion instance.
 - **`comparator`**: A function with the signature `(item, test?) => Record<string, boolean>`.
 
   **Important:**
-    - This function must be able to handle cases where the `item` (the first argument) is `null` or `undefined`.
-    - It must always return an object with the complete key structure, as this structure is used to generate the dynamic methods on the `Criterion` instance.
+
+  - This function must be able to handle cases where the `item` (the first argument) is `null` or `undefined`.
+  - It must always return an object with the complete key structure, as this structure is used to generate the dynamic methods on the `Criterion` instance.
 
 ### Dynamic Methods
 
