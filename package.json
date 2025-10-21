@@ -1,6 +1,6 @@
 {
   "name": "nekrion",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Type-safe, chainable dataset evaluator that dynamically generates logic-based search methods from a user-defined comparator.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
