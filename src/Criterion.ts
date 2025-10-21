@@ -8,7 +8,7 @@ export type ComparatorResult<K extends PropertyKey = string> = Record<K, boolean
  * Describes a dynamic interface of callable comparison methods.
  * Each method accepts an optional test value and returns a new chainable Search instance.
  */
-type CriterionInstance<D, T extends ComparatorResult> = {
+export type CriterionInstance<D, T extends ComparatorResult> = {
     [K in keyof T]: (arg?: D) => Criterion<D, T> & CriterionInstance<D, T>;
 };
 
@@ -17,7 +17,7 @@ type CriterionInstance<D, T extends ComparatorResult> = {
  * It takes a datum, an optional test value, and an optional key,
  * returning a ComparatorResult indicating the outcomes of various comparisons.
  */
-type ComparatorFunction<D, T extends ComparatorResult> = (datum: D, test?: D, key?: keyof T) => T;
+export type ComparatorFunction<D, T extends ComparatorResult> = (datum: D, test?: D, key?: keyof T) => T;
 
 /**
  * Criterion class provides a composable, chainable interface for
