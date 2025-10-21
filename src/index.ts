@@ -1,4 +1,4 @@
-export { default } from './Criterion';
+export { default } from './Criterion.js';
 
-export * from './Criterion';
+export * from './Criterion.js';
 

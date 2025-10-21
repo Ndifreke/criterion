@@ -12,6 +12,11 @@ type CriterionInstance<D, T extends ComparatorResult> = {
     [K in keyof T]: (arg?: D) => Criterion<D, T> & CriterionInstance<D, T>;
 };
 
+/**
+ * Describes the signature of a comparator function.
+ * It takes a datum, an optional test value, and an optional key,
+ * returning a ComparatorResult indicating the outcomes of various comparisons.
+ */
 type ComparatorFunction<D, T extends ComparatorResult> = (datum: D, test?: D, key?: keyof T) => T;
 
 /**
