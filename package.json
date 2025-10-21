@@ -1,0 +1,56 @@
+{
+  "name": "criterion",
+  "version": "1.0.0",
+  "description": "Type-safe, chainable dataset evaluator that dynamically generates logic-based search methods from a user-defined comparator.",
+  "main": "dist/index.js",
+  "types": "index.d.ts",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "test": "jest --passWithNoTests",
+    "dev": "vitest watch",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "criterion",
+    "search",
+    "logic",
+    "comparator",
+    "chainable",
+    "typescript",
+    "data-evaluator",
+    "dataset",
+    "filter",
+    "dynamic-methods",
+    "functional",
+    "composable",
+    "data-analysis"
+  ],
+  "author": "Ndifreke Ekim <ndifreke.dev@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndifreke/criterion.git"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "husky": "^8.0.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "index.d.ts"
+      ]
+    }
+  }
+}
